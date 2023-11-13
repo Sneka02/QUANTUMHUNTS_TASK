@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Drag and Drop</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .drag-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .draggable-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Students dashboard</h2>
+
+  <div class="drag-container">
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Arun</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Tejas</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">David</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Uma</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Divya</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Simon</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Rakesh</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Selvam</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Shruthi</div>
+    <div class="draggable-item" draggable="true" ondragstart="drag(event)">Deepak</div>
+  
+  </div>
+</div>
+
+<script>
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.innerText);
+  }
+
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var newItem = document.createElement("div");
+    newItem.className = "draggable-item";
+    newItem.textContent = data;
+    newItem.draggable = true;
+    newItem.ondragstart = drag;
+    ev.target.appendChild(newItem);
+  }
+</script>
+
+</body>
+</html>
+
